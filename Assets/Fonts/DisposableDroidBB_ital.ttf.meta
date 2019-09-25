@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: ce16aac0f42685541a9b739eb5c2fec5
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DisposableDroid BB
+  fontNames:
+  - DisposableDroid BB
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 315d6b245099f0c49a5eeaf66a6882df, type: 3}
+  - {fileID: 12800000, guid: c2a966b41d9708f4fbeebdd4ea2749ae, type: 3}
+  - {fileID: 12800000, guid: 3a94dada820421240bfd276da5c86912, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
