@@ -66,7 +66,7 @@ public class CashRegisterBehaviourScript : MonoBehaviour
 
         //currentTextBubble = GameObject.FindGameObjectWithTag("TextBubble"); //Otherwise he disables the prefab, not the active textbubble
         //currentTextBubble = TextBubble;
-        Debug.Log("dfsdf" + currentTextBubble);
+        
         if (priceToPay.Contains("."))
         {
             string[] splitParts = priceToPay.Split('.');
