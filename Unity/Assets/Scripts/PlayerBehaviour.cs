@@ -9,9 +9,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     public List<GameObject> SelectedItems = new List<GameObject>();
     public float TotalPriceToPay;
-    
+    public GameObject inventorySlot;
 
-     
+
+
+    private List<GameObject> InventoryList = new List<GameObject>(); 
     private GameObject _inspectedItem;
 
     private void Start()
@@ -112,7 +114,7 @@ public class PlayerBehaviour : MonoBehaviour
         currentScript.IsSelected = true;
 
       
-
+        
         if(currentScript.InStock > 0)
         {
             currentScript.InStock--;
