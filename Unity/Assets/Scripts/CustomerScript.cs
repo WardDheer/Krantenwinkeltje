@@ -25,11 +25,11 @@ public class CustomerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Game = GameObject.FindGameObjectWithTag("GameBehaviour").GetComponent<GameBehaviour>();
         CalculateAmountOfItems();
+
         //DELETE THIS
-        AmountOfItems = UnityEngine.Random.Range(1,4);
-        DetermineObjects();
+        AmountOfItems = 1;
+        DetermineObjects(); //runs good, checked
         DisplayItems();
     }
 
@@ -49,41 +49,42 @@ public class CustomerScript : MonoBehaviour
         if (Timer <= 0)
         {
             Timer = 10;
-            foreach (Transform child in transform)
-            {
-                Destroy(child.gameObject);
-            }
+                    //RejectionFunction
             Destroy(this.gameObject);
-            Instantiate(Customer);
         }
     }
 
 
     //Tweak this if the pace of the game is wrong
-    private void CalculateAmountOfItems()
+    private int CalculateAmountOfItems()
     {
-        AmountOfItems = GameBehaviour.CurrentLevel;     // Is declared by the level of the game
+             
         float randomValue = UnityEngine.Random.value;
 
         if (randomValue < 0.20f) AmountOfItems -= 1;        //You have a slight percent chance to get an extra item or an item less.
         if (randomValue > 0.80f) AmountOfItems += 1;
 
 
-        AmountOfItems = (int)Mathf.Max(AmountOfItems, 1f);  //you can never get less than 1 item.
+       return (int)Mathf.Max(AmountOfItems, 1f);    //you can never get less than 1 item.
     }
 
     private void DetermineObjects()
     {
-        _wantedItems = new GameObject[AmountOfItems-1];     //The size of the array is the amount of items he wants
+        _wantedItems = new GameObject[AmountOfItems];     //The size of the array is the amount of items he wants
 
  
         for (int i = 0; i < _wantedItems.Length; i++)
         {
-            int index = (int)Mathf.Round(UnityEngine.Random.Range(0, Game.GetComponent<GameBehaviour>().ItemsInTheShop.Count));     //Get a random index between 0 and the length of the array with items
-            _wantedItems[i] = Game.GetComponent<GameBehaviour>().ItemsInTheShop[index];                                  //Get the item on the number of the index from the gamebehaviour script
+            int arrayIndex = GetRandomInteger();    //Get a random index between 0 and the length of the array with items
+            _wantedItems[i] = Game.GetComponent<GameBehaviour>().ItemsInTheShop[arrayIndex];                                  //Get the item on the number of the index from the gamebehaviour script
 
             _amountToPay += _wantedItems[i].GetComponent<ShopItemScript>().ThisPrice;   //He calculates himself how much he needs to pay
         }
+    }
+
+    private int GetRandomInteger()
+    {
+        return (int)Mathf.Round(UnityEngine.Random.Range(0, Game.GetComponent<GameBehaviour>().ItemsInTheShop.Count));
     }
 
     private void DisplayItems()

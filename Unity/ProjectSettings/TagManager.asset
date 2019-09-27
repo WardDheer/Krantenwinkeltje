@@ -9,6 +9,7 @@ TagManager:
   - GameBehaviour
   - TextBubble
   - Mouse
+  - Customer
   layers:
   - Default
   - TransparentFX
