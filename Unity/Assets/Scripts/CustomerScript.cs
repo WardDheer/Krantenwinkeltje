@@ -8,14 +8,14 @@ public class CustomerScript : MonoBehaviour
 {
     public GameBehaviour Game;
     public GameObject Customer;
-    public float Timer = 10.0f;
+    public float Timer = 1.0f;
 
     [Header("Different Textbubbles")]
     public GameObject TextbubbleForOneItem;
     public GameObject TextbubbleForTwoItems;
     public GameObject TextbubbleForThreeItems;
 
-    private int AmountOfItems;
+    
     private GameObject[] _wantedItems;
     private float _amountToPay = 0f;
 
@@ -25,10 +25,7 @@ public class CustomerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CalculateAmountOfItems();
-
-        //DELETE THIS
-        AmountOfItems = 1;
+        Game = GameObject.FindGameObjectWithTag("GameBehaviour").GetComponent<GameBehaviour>();
         DetermineObjects(); //runs good, checked
         DisplayItems();
     }
@@ -58,19 +55,19 @@ public class CustomerScript : MonoBehaviour
     //Tweak this if the pace of the game is wrong
     private int CalculateAmountOfItems()
     {
-             
+        int amountOfItems = 1;
         float randomValue = UnityEngine.Random.value;
 
-        if (randomValue < 0.20f) AmountOfItems -= 1;        //You have a slight percent chance to get an extra item or an item less.
-        if (randomValue > 0.80f) AmountOfItems += 1;
+        if (randomValue < 0.20f) amountOfItems -= 1;        //You have a slight percent chance to get an extra item or an item less.
+        if (randomValue > 0.80f) amountOfItems += 1;
 
 
-       return (int)Mathf.Max(AmountOfItems, 1f);    //you can never get less than 1 item.
+       return (int)Mathf.Max(amountOfItems, 1f);    //you can never get less than 1 item.
     }
 
     private void DetermineObjects()
     {
-        _wantedItems = new GameObject[AmountOfItems];     //The size of the array is the amount of items he wants
+        _wantedItems = new GameObject[CalculateAmountOfItems()];     //The size of the array is the amount of items he wants
 
  
         for (int i = 0; i < _wantedItems.Length; i++)
@@ -105,7 +102,7 @@ public class CustomerScript : MonoBehaviour
                 GetIconsForTextBubble(2, TextbubbleForTwoItems);
                 break;
             case 3:
-                TextbubbleForThreeItems = Instantiate(TextbubbleForThreeItems, this.transform);
+                TextbubbleForThreeItems = Instantiate(TextbubbleForThreeItems, this.transform.position, this.transform.rotation, this.transform);
 
                 GetIconsForTextBubble(3, TextbubbleForThreeItems);
                 break;
