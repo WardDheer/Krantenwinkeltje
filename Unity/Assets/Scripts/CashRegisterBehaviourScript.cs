@@ -31,6 +31,8 @@ public class CashRegisterBehaviourScript : MonoBehaviour
     {
         //Debug.Log(_dailyEarnings);
         ExitPayMode();
+
+        Debug.Log(_dailyEarnings);
     }
 
     private void ComparePricesWithCustomer()
