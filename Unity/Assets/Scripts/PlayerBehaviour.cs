@@ -32,7 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 
         TotalPriceToPay = Mathf.Max(TotalPriceToPay, 0f);
-        //Debug.Log(TotalPriceToPay);
+        
     }
 
     private void SelectShopItems()
