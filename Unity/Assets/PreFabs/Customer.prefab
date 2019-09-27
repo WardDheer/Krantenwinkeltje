@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Game: {fileID: 0}
   Customer: {fileID: 4226236184971058786}
-  Timer: 10
+  Timer: 1.96
   TextbubbleForOneItem: {fileID: 4571338883272135423, guid: e21e865c78ca711489d7182e2d3a7c12,
     type: 3}
   TextbubbleForTwoItems: {fileID: 4571338883272135423, guid: d9ec5bef3d6bece4ca828b66d57f3739,
