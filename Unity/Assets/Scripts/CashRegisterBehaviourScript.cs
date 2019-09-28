@@ -8,6 +8,7 @@ public class CashRegisterBehaviourScript : MonoBehaviour
     public GameObject TextBubble;
     public float EnteredNumber;
     public InputField input;
+    public PlayerBehaviour Player;
 
     [SerializeField]
     private float _dailyEarnings;
@@ -17,8 +18,9 @@ public class CashRegisterBehaviourScript : MonoBehaviour
     private float _checkoutTotal;
     private GameObject currentTextBubble;
 
+    [SerializeField]
     private CustomerScript _customer;
-    private PlayerBehaviour _player;
+    
 
 
     void Start()
@@ -116,19 +118,49 @@ public class CashRegisterBehaviourScript : MonoBehaviour
     }
     private bool CompareOrders()
     {
-        List<GameObject> _playerList = _player.SelectedItems;
-        List<GameObject> _customerList = _customer.WantedItems;
+        _customer = GameObject.FindGameObjectWithTag("Customer").GetComponent<CustomerScript>();
+        List<GameObject> playerList = Player.SelectedItems;
+        List<GameObject> customerList = _customer.WantedItems;
 
-        if(_playerList.Count != _customerList.Count)        //if the amount of items is different, the order is wrong
+        if(playerList.Count != customerList.Count)        //if the amount of items is different, the order is wrong
         {
             return false;
         }
 
-        foreach( GameObject item in _playerList)
+        /*foreach( GameObject item in playerList)
         {
+            if (customerList.Contains(item) && item != null)
+            {
+                customerList.Remove(item);
+                playerList.Remove(item);
+            }
+        }*/
 
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            GameObject currentObject;
+            if (playerList[i] != null)
+            {
+             currentObject = playerList[i];
+            }
+            else
+            {
+                Debug.Log("Item in list is null");
+                currentObject = this.gameObject;
+            }
+
+            if (customerList.Contains(currentObject))
+            {
+                customerList.Remove(currentObject);
+                playerList.RemoveAt(i);
+            }
         }
 
-        return true;
+        if(playerList.Count == 0 && customerList.Count == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -1244,7 +1244,9 @@ MonoBehaviour:
     type: 3}
   EnteredNumber: 0
   input: {fileID: 0}
+  Player: {fileID: 1852955390}
   _dailyEarnings: 0
+  _customer: {fileID: 0}
 --- !u!1 &1543161953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,9 +1704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1792750b5c45b4c8e0806f7fa84c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectedItems: []
   TotalPriceToPay: 0
   inventorySlot: {fileID: 0}
+  SelectedItems: []
 --- !u!4 &1852955391
 Transform:
   m_ObjectHideFlags: 0
