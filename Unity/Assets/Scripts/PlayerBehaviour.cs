@@ -8,9 +8,11 @@ public class PlayerBehaviour : MonoBehaviour
 {
     
 
-    public List<GameObject> SelectedItems = new List<GameObject>();
+    //public List<GameObject> SelectedItems = new List<GameObject>();
     public float TotalPriceToPay;
     public GameObject _inventorySlot;
+
+    public List<GameObject> SelectedItems = new List<GameObject>();
 
 
 
@@ -67,7 +69,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void InspectShopItems()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             int shopItemsLayer = 9;  //Layer of Selectable Shop Items
             int layermask = (1 << shopItemsLayer); //Make sure the raycast only collides with the items in the shop
@@ -83,7 +85,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                 _inspectedItem = hit.transform.gameObject;   
             }
-        }
+        }*/
 
         if (Input.GetKeyUp(KeyCode.Space))
         {

@@ -50,15 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7f4050bb42cf343b5b7cf8bc8c41d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Game: {fileID: 0}
   Customer: {fileID: 4226236184971058786}
-  Timer: 1.96
+  Timer: 10.07
   TextbubbleForOneItem: {fileID: 4571338883272135423, guid: e21e865c78ca711489d7182e2d3a7c12,
     type: 3}
   TextbubbleForTwoItems: {fileID: 4571338883272135423, guid: d9ec5bef3d6bece4ca828b66d57f3739,
     type: 3}
   TextbubbleForThreeItems: {fileID: 4571338883272135423, guid: c959210170f9a8f49b8c0baabafee25e,
     type: 3}
+  WantedItems: []
 --- !u!222 &8551978325719933024
 CanvasRenderer:
   m_ObjectHideFlags: 0

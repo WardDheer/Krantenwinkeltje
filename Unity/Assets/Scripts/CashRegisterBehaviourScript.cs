@@ -8,6 +8,7 @@ public class CashRegisterBehaviourScript : MonoBehaviour
     public GameObject TextBubble;
     public float EnteredNumber;
     public InputField input;
+    public PlayerBehaviour Player;
 
     [SerializeField]
     private float _dailyEarnings;
@@ -16,6 +17,10 @@ public class CashRegisterBehaviourScript : MonoBehaviour
 
     private float _checkoutTotal;
     private GameObject currentTextBubble;
+
+    [SerializeField]
+    private CustomerScript _customer;
+    
 
 
     void Start()
@@ -29,13 +34,12 @@ public class CashRegisterBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(_dailyEarnings);
         ExitPayMode();
 
         Debug.Log(_dailyEarnings);
     }
 
-    private void ComparePricesWithCustomer()
+    private void ComparePrices()
     {
         float litteralPriceForcustomer = GameObject.FindGameObjectWithTag("Mouse").GetComponent<PlayerBehaviour>().TotalPriceToPay;
         if(EnteredNumber > litteralPriceForcustomer)
@@ -52,7 +56,6 @@ public class CashRegisterBehaviourScript : MonoBehaviour
         }
     }
 
-
     public void ActivateTextBubble()
     {
             InputField inputField = currentTextBubble.GetComponentInChildren<InputField>();
@@ -62,7 +65,6 @@ public class CashRegisterBehaviourScript : MonoBehaviour
             inputField.Select();
             inputField.characterValidation = InputField.CharacterValidation.Decimal;
     }
-   
     public void InputNumbers(string priceToPay)
     {
 
@@ -88,7 +90,7 @@ public class CashRegisterBehaviourScript : MonoBehaviour
             else EnteredNumber = float.Parse(priceToPay);
         }
 
-        ComparePricesWithCustomer();
+        ComparePlayerWithCustomer();
         currentTextBubble.GetComponentInChildren<InputField>().DeactivateInputField();
         currentTextBubble.SetActive(false);
 
@@ -97,7 +99,6 @@ public class CashRegisterBehaviourScript : MonoBehaviour
 
         GameBehaviour.gameState = GameState.SelectMode;
     }
-
     private void ExitPayMode()      //We will need more options on how to skip the pay method
     {
         if (GameBehaviour.gameState == GameState.PayMode && Input.GetKeyDown(KeyCode.Escape))
@@ -106,9 +107,60 @@ public class CashRegisterBehaviourScript : MonoBehaviour
             currentTextBubble.SetActive(false); //Do not destroy, but hide
         }
     }
-
     public void SetGameStateToPayMode()
     {
         GameBehaviour.gameState = GameState.PayMode;
+    }
+    private void ComparePlayerWithCustomer()
+    {
+        CompareOrders();
+        ComparePrices();
+    }
+    private bool CompareOrders()
+    {
+        _customer = GameObject.FindGameObjectWithTag("Customer").GetComponent<CustomerScript>();
+        List<GameObject> playerList = Player.SelectedItems;
+        List<GameObject> customerList = _customer.WantedItems;
+
+        if(playerList.Count != customerList.Count)        //if the amount of items is different, the order is wrong
+        {
+            return false;
+        }
+
+        /*foreach( GameObject item in playerList)
+        {
+            if (customerList.Contains(item) && item != null)
+            {
+                customerList.Remove(item);
+                playerList.Remove(item);
+            }
+        }*/
+
+        for (int i = 0; i < playerList.Count; i++)
+        {
+            GameObject currentObject;
+            if (playerList[i] != null)
+            {
+             currentObject = playerList[i];
+            }
+            else
+            {
+                Debug.Log("Item in list is null");
+                currentObject = this.gameObject;
+            }
+
+            if (customerList.Contains(currentObject))
+            {
+                customerList.Remove(currentObject);
+                playerList.RemoveAt(i);
+            }
+        }
+
+        if(playerList.Count == 0 && customerList.Count == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
