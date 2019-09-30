@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 
@@ -9,7 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public List<GameObject> SelectedItems = new List<GameObject>();
     public float TotalPriceToPay;
-    public GameObject inventorySlot;
+    public GameObject _inventorySlot;
 
 
 
@@ -112,10 +113,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
         ShopItemScript currentScript = currentObject.GetComponent<ShopItemScript>();
         currentScript.IsSelected = true;
+        GameObject inventorySlot = Instantiate(this._inventorySlot);
+        InventoryList.Add(inventorySlot);
+        inventorySlot.transform.position += new Vector3((InventoryList.Count - 1) % 2 * 100, (InventoryList.Count - 1) / 2 * 100,0);
+        inventorySlot.GetComponent<Image>().sprite = currentObject.GetComponent<Image>().sprite;
 
-      
-        
-        if(currentScript.InStock > 0)
+
+
+        if (currentScript.InStock > 0)
         {
             currentScript.InStock--;
             currentScript.TotalSelected++;
